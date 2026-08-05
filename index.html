@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>دعوت به قرار ❤️</title>
+<meta name="description" content="یک دعوت خاص، برای یک شب خاص.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- پس‌زمینه سراسری: گرادینت، نور، قلب‌های شناور -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__orb ambient__orb--1"></div>
+    <div class="ambient__orb ambient__orb--2"></div>
+    <div class="ambient__orb ambient__orb--3"></div>
+    <div class="ambient__grain"></div>
+    <div id="floatingHearts" class="floating-hearts"></div>
+  </div>
+
+  <!-- صفحه بارگذاری -->
+  <div id="loader" class="loader">
+    <div class="loader__heart">
+      <svg viewBox="0 0 32 29" class="loader__heart-svg">
+        <path d="M16 28.3S1.6 19.8 1.6 9.9C1.6 4.4 5.6.9 10 .9c2.7 0 5.1 1.4 6 3.5.9-2.1 3.3-3.5 6-3.5 4.4 0 8.4 3.5 8.4 9 0 9.9-14.4 18.4-14.4 18.4z"/>
+      </svg>
+    </div>
+    <p class="loader__text">در حال آماده‌سازی یک لحظه‌ی خاص…</p>
+  </div>
+
+  <!-- نشانگر مراحل -->
+  <div class="progress" id="progress" aria-hidden="true">
+    <span class="progress__dot" data-dot="1"></span>
+    <span class="progress__dot" data-dot="2"></span>
+    <span class="progress__dot" data-dot="3"></span>
+    <span class="progress__dot" data-dot="4"></span>
+  </div>
+
+  <main id="app" class="app">
+
+    <!-- صفحه ۱ -->
+    <section class="screen screen--hero active" data-screen="1" id="screen1">
+      <div class="hero" id="heroArea">
+        <p class="hero__eyebrow">یک دعوت خاص</p>
+        <h1 class="hero__title">با من میای دیت؟ <span class="hero__heart">❤️</span></h1>
+        <p class="hero__subtitle">فقط کافیه یه جواب بدی… یکیش راحته 😉</p>
+
+        <div class="hero__buttons" id="heroButtons">
+          <button class="btn btn--yes" id="yesBtn" type="button">
+            <span class="btn__ripple"></span>
+            <span class="btn__label">❤️ آره</span>
+          </button>
+          <button class="btn btn--no" id="noBtn" type="button">
+            <span class="btn__label">😅 نه</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- صفحه ۲ -->
+    <section class="screen screen--calendar" data-screen="2" id="screen2">
+      <div class="panel">
+        <h2 class="panel__title">تاریخ و ساعت قرار را انتخاب کن</h2>
+        <p class="panel__subtitle" id="selectedDateSummary">هنوز چیزی انتخاب نشده</p>
+
+        <div class="glass-card calendar-card">
+          <div class="calendar__header">
+            <button class="calendar__nav" id="prevMonth" type="button" aria-label="ماه قبل">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="calendar__month-label" id="monthLabel">مرداد ۱۴۰۵</div>
+            <button class="calendar__nav" id="nextMonth" type="button" aria-label="ماه بعد">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="calendar__weekdays" id="weekdaysRow"></div>
+          <div class="calendar__grid" id="daysGrid"></div>
+        </div>
+
+        <div class="glass-card time-card">
+          <p class="time-card__label">🕒 ساعت قرار</p>
+          <div class="time-picker">
+            <div class="time-picker__col">
+              <span class="time-picker__caption">ساعت</span>
+              <div class="time-picker__scroll" id="hourScroll"></div>
+            </div>
+            <span class="time-picker__colon">:</span>
+            <div class="time-picker__col">
+              <span class="time-picker__caption">دقیقه</span>
+              <div class="time-picker__scroll" id="minuteScroll"></div>
+            </div>
+          </div>
+          <p class="time-card__hint" id="timeHint"></p>
+        </div>
+
+        <div class="panel__actions">
+          <button class="btn btn--ghost" data-back type="button">بازگشت</button>
+          <button class="btn btn--primary" id="toStep3" type="button" disabled>مرحله بعد</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- صفحه ۳ -->
+    <section class="screen screen--place" data-screen="3" id="screen3">
+      <div class="panel">
+        <h2 class="panel__title">محل قرار را انتخاب کن</h2>
+        <p class="panel__subtitle">هرجا که راحت‌تری و بیشتر دوست داری</p>
+
+        <div class="place-grid" id="placeGrid">
+          <button class="place-card" data-place="کافه" type="button">
+            <span class="place-card__icon">☕</span>
+            <span class="place-card__label">کافه</span>
+          </button>
+          <button class="place-card" data-place="رستوران" type="button">
+            <span class="place-card__icon">🍽️</span>
+            <span class="place-card__label">رستوران</span>
+          </button>
+          <button class="place-card" data-place="پارک" type="button">
+            <span class="place-card__icon">🌳</span>
+            <span class="place-card__label">پارک</span>
+          </button>
+          <button class="place-card" data-place="پیاده‌روی" type="button">
+            <span class="place-card__icon">🚶</span>
+            <span class="place-card__label">پیاده‌روی</span>
+          </button>
+          <button class="place-card" data-place="سینما" type="button">
+            <span class="place-card__icon">🎬</span>
+            <span class="place-card__label">سینما</span>
+          </button>
+          <button class="place-card" data-place="مرکز خرید" type="button">
+            <span class="place-card__icon">🛍️</span>
+            <span class="place-card__label">مرکز خرید</span>
+          </button>
+          <button class="place-card" data-place="شهربازی" type="button">
+            <span class="place-card__icon">🎡</span>
+            <span class="place-card__label">شهربازی</span>
+          </button>
+          <button class="place-card" data-place="کنار دریا" type="button">
+            <span class="place-card__icon">🌅</span>
+            <span class="place-card__label">کنار دریا</span>
+          </button>
+          <button class="place-card place-card--custom" data-place="custom" type="button">
+            <span class="place-card__icon">✨</span>
+            <span class="place-card__label">محل دلخواه</span>
+          </button>
+        </div>
+
+        <div class="custom-place" id="customPlaceWrap" hidden>
+          <input type="text" id="customPlaceInput" class="custom-place__input" placeholder="مثلاً: کافه‌ی گوشه‌ی خیابون ولیعصر" maxlength="60">
+        </div>
+
+        <div class="panel__actions">
+          <button class="btn btn--ghost" data-back type="button">بازگشت</button>
+          <button class="btn btn--primary" id="toStep4" type="button" disabled>مرحله بعد</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- صفحه ۴ -->
+    <section class="screen screen--summary" data-screen="4" id="screen4">
+      <div class="panel panel--summary">
+        <div class="summary-card glass-card">
+          <h2 class="summary-card__title">ممنون که دعوتم رو قبول کردی <span>❤️</span></h2>
+          <p class="summary-card__subtitle">بی‌صبرانه منتظر دیدنت هستم.</p>
+
+          <div class="summary-list">
+            <div class="summary-item">
+              <span class="summary-item__icon">📅</span>
+              <span class="summary-item__text" id="finalDate">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-item__icon">🕒</span>
+              <span class="summary-item__text" id="finalTime">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-item__icon">📍</span>
+              <span class="summary-item__text" id="finalPlace">—</span>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--wide" id="finishBtn" type="button">پایان ✨</button>
+        </div>
+      </div>
+      <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
